@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECCENCE | High-Value Fragrance Specialist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Montserrat:wght@100;300;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --rose-gold: #e5b0a3; --deep-burgundy: #1a0101; }
+        body { background-color: var(--deep-burgundy); color: white; font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+        .luxury-font { font-family: 'Cormorant Garamond', serif; }
+        
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-track { background: var(--deep-burgundy); }
+        ::-webkit-scrollbar-thumb { background: var(--rose-gold); }
+
+        /* ANIMATIONS */
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal { animation: slideUpFade 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .glass-card:hover { 
+            background: rgba(255, 255, 255, 0.07); 
+            transform: translateY(-12px); 
+            border-color: var(--rose-gold); 
+        }
+
+        /* Shine Sweep Effect */
+        .glass-card::after {
+            content: ''; position: absolute; top: 0; left: -150%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(229, 176, 163, 0.15), transparent);
+            transform: skewX(-20deg); transition: 0.8s;
+        }
+        .glass-card:hover::after { left: 150%; }
+
+        .btn-main {
+            background: transparent; border: 1px solid rgba(229, 176, 163, 0.4);
+            color: var(--rose-gold); padding: 14px; font-size: 10px;
+            letter-spacing: 4px; text-transform: uppercase; transition: 0.5s;
+        }
+        .btn-main:hover { background: var(--rose-gold); color: black; box-shadow: 0 0 20px rgba(229, 176, 163, 0.2); }
+
+        .variant-btn {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 16px; font-size: 10px; transition: 0.3s;
+        }
+        .variant-btn.active { border-color: var(--rose-gold); color: var(--rose-gold); background: rgba(229, 176, 163, 0.05); }
+
+        /* MODAL ANIMATION */
+        #product-modal.hidden { display: none; }
+        #product-modal-content { transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+        .modal-open #product-modal-content { transform: scale(1); opacity: 1; }
+        
+        .price-old { font-size: 0.8em; color: #ff9d9d; text-decoration: line-through; opacity: 0.5; margin-left: 10px; }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed w-full z-[100] border-b border-white/5 px-8 py-6 flex justify-between items-center bg-[#1a0101]/90 backdrop-blur-xl">
+        <h1 class="luxury-font text-3xl tracking-[0.5em] cursor-pointer" onclick="window.location.reload()">ECCENCE</h1>
+        <div class="relative cursor-pointer text-rose-gold" onclick="toggleCart()">
+            <i data-lucide="shopping-cart" class="w-5 h-5"></i>
+            <span id="cart-badge" class="absolxxute -top-3 -right-3 bg-white text-black text-[9px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-20">
+        <section class="px-6 md:px-24">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20">
+                <div>
+                    <p class="text-rose-gold text-[10px] tracking-[0.8em] uppercase mb-4 opacity-70">Curated Archive</p>
+                    <h2 class="luxury-font text-7xl italic reveal">The Vault</h2>
+                </div>
+                <div class="flex gap-8 text-[10px] uppercase tracking-widest opacity-40 py-2">
+                    <button onclick="filterG('All')" class="hover:text-rose-gold transition">All</button>
+                    <button onclick="filterG('Men')" class="hover:text-rose-gold transition">Men</button>
+                    <button onclick="filterG('Women')" class="hover:text-rose-gold transition">Women</button>
+                </div>
+            </div>
+
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                </div>
+        </section>
+    </main>
+
+    <div id="product-modal" class="fixed inset-0 z-[300] hidden flex items-center justify-center p-6">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="closeModal()"></div>
+        <div id="product-modal-content" class="relative w-full max-w-4xl bg-[#0d0101] border border-white/10 p-12 flex flex-col md:flex-row gap-12 opacity-0 scale-95 transition-all">
+            <button onclick="closeModal()" class="absolute top-6 right-6 opacity-30 hover:opacity-100"><i data-lucide="x"></i></button>
+            
+            <div class="w-full md:w-1/2 flex items-center justify-center bg-white/5 p-10">
+                <img id="modal-img" src="" class="max-h-96 object-contain drop-shadow-2xl">
+            </div>
+
+            <div class="w-full md:w-1/2 space-y-8">
+                <div>
+                    <p id="modal-gender" class="text-[9px] tracking-[0.4em] text-rose-gold uppercase mb-2"></p>
+                    <h3 id="modal-name" class="luxury-font text-5xl italic mb-4"></h3>
+                    <div class="flex items-baseline">
+                        <span id="modal-price" class="text-2xl text-rose-gold font-light"></span>
+                        <span id="modal-old" class="price-old text-lg"></span>
+                    </div>
+                </div>
+
+                <div id="modal-variants-container" class="space-y-4">
+                    <p class="text-[9px] uppercase tracking-[0.3em] opacity-40">Select Volume</p>
+                    <div id="modal-variants" class="flex gap-4"></div>
+                </div>
+
+                <div class="space-y-6 pt-6 border-t border-white/5">
+                    <div class="flex items-center justify-between border border-white/10 p-4">
+                        <button class="px-6" onclick="updateModalQty(-1)">-</button>
+                        <span id="modal-qty" class="text-sm">1</span>
+                        <button class="px-6" onclick="updateModalQty(1)">+</button>
+                    </div>
+                    <button onclick="addCurrentToBag()" class="btn-main w-full py-6">Add to Acquisition</button>
+                    <button class="w-full py-4 text-[9px] uppercase tracking-[0.4em] opacity-30">Immediate Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full md:w-[480px] bg-[#0a0101] z-[400] translate-x-full transition-transform duration-700 p-12 flex flex-col border-l border-white/10">
+        <div class="flex justify-between items-center mb-16">
+            <h4 class="luxury-font text-4xl italic">Acquisitions</h4>
+            <button onclick="toggleCart()" class="opacity-20 hover:opacity-100"><i data-lucide="x"></i></button>
+        </div>
+        <div id="cart-items" class="flex-grow overflow-y-auto space-y-8"></div>
+        <div class="pt-10 border-t border-white/10 space-y-6">
+            <div class="flex justify-between uppercase tracking-[0.2em] text-xs">
+                <span class="opacity-40">Total Value</span>
+                <span id="cart-total" class="text-rose-gold text-xl">0 EGP</span>
+            </div>
+            <button class="w-full py-6 bg-white text-black font-bold uppercase text-[11px] tracking-[0.4em] hover:bg-rose-gold transition-all duration-500">Checkout</button>
+        </div>
+    </div>
+
+    <script>
+        const inventory = [
+            { id: 1, name: "YSL MYSLF", gender: "Men", file: "MYSLF Le Parfum - Men's Spicy Vanilla Fragrance - YSL Beauty.jpg", 
+                variants: [ {size: "60ml", price: 1000, old: 1400}, {size: "100ml", price: 1400, old: 1900} ] },
+            { id: 2, name: "YSL Y EDP", gender: "Men", file: "Ysl.JPG", 
+                variants: [ {size: "100ml", price: 1200, old: 1650}, {size: "200ml", price: 2100, old: 2800} ] },
+            { id: 3, name: "LV Imagination", gender: "Men", file: "LouisVuittonimagination.JPG", price: 4800, old: 5600 },
+            { id: 4, name: "LV Pacific Chill", gender: "Men", file: "LouisVuittonPacificchill.JPG", price: 4800, old: 5600 },
+            { id: 5, name: "Dark Verse", gender: "Women", file: "Luna Caine ✩ Dark Verse.webp", price: 1350, old: 1800 },
+            { id: 6, name: "PDM Delina Exclusif", gender: "Women", file: "pdm dalida.webp", price: 5800, old: 7200 },
+            { id: 7, name: "YSL Libre Intense", gender: "Women", file: "Libre Eau de Parfum Intense Women's Perfume _ YSL Beauty.webp", price: 2400, old: 3100 },
+            { id: 8, name: "Valentino Born Roma", gender: "Women", file: "valnteino born in rome intense wommen.jpg", price: 2100, old: 2750 },
+            { id: 9, name: "YSL Babycat", gender: "Men", file: "Yves Saint Laurent Babycat Eau de Parfum _ Nordstrom.jpg", price: 5500, old: 6500 },
+            { id: 10, name: "ADG Profondo", gender: "Men", file: "aqua di gio.jpg", price: 1800, old: 2400 },
+            { id: 11, name: "Creed Aventus", gender: "Men", file: "Creedaventos.JPG", price: 7500, old: 9000 },
+            { id: 12, name: "Lattafa Asad", gender: "Men", file: "Lattafa Perfumes Asad for Unisex Eau de Parfum Spray, 3_4 Ounce.jpg", price: 950, old: 1300 }
+        ];
+
+        let cart = [];
+        let currentSelectedProduct = null;
+        let currentSelectedSize = null;
+
+        function renderProducts(items) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = items.map((p, idx) => `
+                <div class="glass-card p-10 flex flex-col h-full reveal" style="animation-delay: ${idx * 0.05}s" onclick="openModal(${p.id})">
+                    <div class="h-64 flex items-center justify-center mb-8">
+                        <img src="${p.file}" class="max-h-full object-contain drop-shadow-2xl">
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="luxury-font text-2xl tracking-wide italic">${p.name}</h4>
+                        <p class="text-rose-gold font-light tracking-widest">${p.variants ? p.variants[0].price : p.price} EGP</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openModal(id) {
+            const p = inventory.find(x => x.id === id);
+            currentSelectedProduct = p;
+            currentSelectedSize = p.variants ? p.variants[0] : { size: 'Standard', price: p.price, old: p.old };
+            
+            document.getElementById('modal-img').src = p.file;
+            document.getElementById('modal-name').innerText = p.name;
+            document.getElementById('modal-gender').innerText = p.gender;
+            updateModalPricing();
+
+            const variantContainer = document.getElementById('modal-variants');
+            if (p.variants) {
+                document.getElementById('modal-variants-container').classList.remove('hidden');
+                variantContainer.innerHTML = p.variants.map(v => `
+                    <button onclick="selectModalSize('${v.size}', ${v.price}, ${v.old}, this)" 
+                        class="variant-btn ${v.size === currentSelectedSize.size ? 'active' : ''}">${v.size}</button>
+                `).join('');
+            } else {
+                document.getElementById('modal-variants-container').classList.add('hidden');
+            }
+
+            document.getElementById('product-modal').classList.remove('hidden');
+            setTimeout(() => document.body.classList.add('modal-open'), 10);
+            lucide.createIcons();
+        }
+
+        function selectModalSize(size, price, old, btn) {
+            currentSelectedSize = { size, price, old };
+            btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            updateModalPricing();
+        }
+
+        function updateModalPricing() {
+            document.getElementById('modal-price').innerText = currentSelectedSize.price + " EGP";
+            document.getElementById('modal-old').innerText = currentSelectedSize.old + " EGP";
+        }
+
+        function closeModal() {
+            document.body.classList.remove('modal-open');
+            setTimeout(() => document.getElementById('product-modal').classList.add('hidden'), 500);
+            document.getElementById('modal-qty').innerText = "1";
+        }
+
+        function updateModalQty(delta) {
+            const span = document.getElementById('modal-qty');
+            let val = parseInt(span.innerText) + delta;
+            span.innerText = Math.max(1, val);
+        }
+
+        function addCurrentToBag() {
+            const qty = parseInt(document.getElementById('modal-qty').innerText);
+            for(let i=0; i<qty; i++) {
+                cart.push({ 
+                    ...currentSelectedProduct, 
+                    displaySize: currentSelectedSize.size, 
+                    displayPrice: currentSelectedSize.price 
+                });
+            }
+            updateCart();
+            closeModal();
+            toggleCart();
+        }
+
+        function updateCart() {
+            document.getElementById('cart-badge').innerText = cart.length;
+            const container = document.getElementById('cart-items');
+            container.innerHTML = cart.map((item, i) => `
+                <div class="flex gap-6 items-center border-b border-white/5 pb-6">
+                    <img src="${item.file}" class="w-20 h-20 object-contain bg-white/5 p-3">
+                    <div class="flex-grow space-y-1">
+                        <p class="luxury-font text-lg italic">${item.name}</p>
+                        <p class="text-[9px] uppercase tracking-widest opacity-40">${item.displaySize}</p>
+                        <p class="text-rose-gold text-xs">${item.displayPrice} EGP</p>
+                    </div>
+                    <button onclick="remove(${i})" class="opacity-20 hover:opacity-100"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                </div>
+            `).join('');
+            const total = cart.reduce((sum, item) => sum + item.displayPrice, 0);
+            document.getElementById('cart-total').innerText = total + " EGP";
+            lucide.createIcons();
+        }
+
+        function remove(i) { cart.splice(i, 1); updateCart(); }
+        function toggleCart() { document.getElementById('cart-drawer').classList.toggle('translate-x-full'); }
+        function filterG(g) { renderProducts(g === 'All' ? inventory : inventory.filter(p => p.gender === g)); }
+
+        renderProducts(inventory);
+        lucide.createIcons();
+    </script>
+</body>
+</html>

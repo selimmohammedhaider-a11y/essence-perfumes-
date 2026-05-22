@@ -53,13 +53,13 @@
             { id: 30, name: "LV Imagination", gender: "Men", file: "lv_imagination_1778786798091.png", price: 800, old: 5600, notes: ["Fresh", "Citrus"], stock: 3 },
             { id: 31, name: "LV Pacific Chill", gender: "Men", file: "lv_pacific_1778786810610.png", price: 800, old: 5600, notes: ["Fresh", "Fruity"], stock: 3 },
             { id: 32, name: "Dark Verse", gender: "Women", file: "essesce products/_i think lovely one.png", price: 1350, old: 1800, notes: ["Dark", "Woody"], stock: 4 },
-            { id: 33, name: "PDM Delina Exclusif", gender: "Women", file: "essesce products/Top Luxury Perfumes for Woman on Amazon.png", price: 750, old: 7200, notes: ["Rose", "Sweet", "Floral"], stock: 2 },
+            { id: 33, name: "PDM Delina Exclusif", gender: "Women", file: "Top Luxury Perfumes for Woman on Amazon.png", price: 750, old: 7200, notes: ["Rose", "Sweet", "Floral"], stock: 2 },
             { id: 34, name: "YSL Libre Intense", gender: "Women", file: "essesce products/How to Choose Fragrances Based on Your Seasonal Color Palette.png", price: 800, old: 3100, notes: ["Lavender", "Vanilla", "Sweet"], stock: 4 },
             { id: 35, name: "Valentino Born Roma", gender: "Women", file: "essesce products/Valentino Donna Born in Roma Intense Eau de Parfum _ Dillard's.png", price: 800, old: 2750, notes: ["Sweet", "Fruity"], stock: 5 },
-            { id: 36, name: "YSL Babycat", gender: "Men", file: "essesce products/11 Leather Perfumes For Any and Every Occasion.png", price: 5500, old: 6500, notes: ["Vanilla", "Spicy", "Dark"], stock: 0 },
+            { id: 36, name: "YSL Babycat", gender: "Men", file: "11 Leather Perfumes For Any and Every Occasion.png", price: 5500, old: 6500, notes: ["Vanilla", "Spicy", "Dark"], stock: 0 },
             { id: 37, name: "ADG Profondo", gender: "Men", file: "aqua_di_gio_profondo_1778787520010.png", price: 850, old: 2400, notes: ["Sea Notes", "Fresh", "Executive"], stock: 4 },
             { id: 38, name: "Creed Aventus", gender: "Men", file: "essesce products/Top 10 Parfumuri Pentru Bărbați din Zodia Săgetător - Replique Parfumerie.png", price: 750, old: 9000, notes: ["Pineapple", "Woody", "Executive"], stock: 3 },
-            { id: 39, name: "Lattafa Asad", gender: "Men", file: "essesce products/10 Best Fragrances For Men 2024.png", price: 700, old: 1300, notes: ["Spicy", "Amber", "Dark"], stock: 10 },
+            { id: 39, name: "Lattafa Asad", gender: "Men", file: "10 Best Fragrances For Men 2024.png", price: 700, old: 1300, notes: ["Spicy", "Amber", "Dark"], stock: 10 },
             { id: 40, name: "Ajwad by Lattafa", gender: "Men", file: "Ajwad by Lattafa for Men - 2_04 oz EDP Spray.png", price: 850, old: 1050, notes: ["Woody", "Amber", "Dark"], stock: 8 },
             { id: 41, name: "Black Diamond Incense", gender: "Unisex", file: "BLACK DIAMOND INCENSE IBRAHIM AL QURASHI _ IBRAQ PERFUME _ IBRAHEEM AL QURASHI.png", price: 950, old: 4500, notes: ["Oud", "Incense", "Dark"], stock: 2 },
             { id: 42, name: "Black Carbon Diamond", gender: "Men", file: "Black Carbon Diamond Edp 150ml By Ibraheem Al Qurashi.png", price: 950, old: 3900, notes: ["Woody", "Spicy", "Dark", "Executive"], stock: 3 },
@@ -75,66 +75,33 @@
             { id: 52, name: "Bade'e Al Oud Honor Glory", gender: "Men", file: "essesce products/Lattafa Bade'e Al Oud Honor Glory Edp 3_4 Oz.png", price: 800, old: 1050, notes: ["Woody", "Amber", "Dark"], stock: 6 },
             { id: 53, name: "Bade'e Al Oud For Glory", gender: "Unisex", file: "essesce products/Lattafa Bade'e Al Oud Oud For Glory Eau De Parfum 100 ml (unisex).png", price: 800, old: 980, notes: ["Oud", "Woody", "Dark"], stock: 8 },
             { id: 54, name: "Badee Al Oud Noble Blush", gender: "Women", file: "essesce products/Lattafa Perfumes - Badee Al Oud Noble Blush Eau De Parfum - 100 ml.png", price: 800, old: 1020, notes: ["Rose", "Floral", "Sweet"], stock: 5 },
-            { id: 55, name: "Tom Ford Lost Cherry", gender: "Women", file: "essesce products/L'eau de parfum Lost Cherry de TOM FORD est aussi tentante and amusante qu'un bonbon_ Ses effluves enivrants de cerise noire se mêlent à des notes d'amande amère_.png", price: 750, old: 5800, notes: ["Cherry", "Almond", "Sweet"], stock: 2 },
+            { id: 55, name: "Tom Ford Lost Cherry", gender: "Women", file: "essesce products/L'eau de parfum Lost Cherry de TOM FORD est aussi tentante et amusante qu'un bonbon_ Ses effluves enivrants de cerise noire se mêlent à des notes d'amande amère_.png", price: 750, old: 5800, notes: ["Cherry", "Almond", "Sweet"], stock: 2 },
             { id: 56, name: "Pink Diamond Sakura", gender: "Women", file: "essesce products/Pink Diamond - Sakura 200ML by Ibrahim Al Qurashi _ Elegant Floral Fragrance with Long-Lasting Freshness - عطر بينك دايموند - ساكورا 200 مل من إبراهيم القرشي _ لمسة زهرية راقية وثبات يدوم طويلاً.png", price: 750, old: 3100, notes: ["Floral", "Fresh", "Sweet"], stock: 3 }
         ];
 
         function getCart() { return JSON.parse(localStorage.getItem('eccence_cart') || '[]'); }
         function saveCart(cart) { localStorage.setItem('eccence_cart', JSON.stringify(cart)); document.dispatchEvent(new CustomEvent('cartUpdated')); }
-        function addToCart(product) { const cart = getCart(); cart.push(product); saveCart(cart); }
-        function removeFromCart(index) { const cart = getCart(); cart.splice(index, 1); saveCart(cart); }
-        function clearCart() { localStorage.removeItem('eccence_cart'); document.dispatchEvent(new CustomEvent('cartUpdated')); }
-        function toggleGiftWrap(status) { localStorage.setItem('eccence_gift_wrap', status); }
-        function isGiftWrapEnabled() { return localStorage.getItem('eccence_gift_wrap') === 'true'; }
+        function clearCart() { localStorage.removeItem('eccence_cart'); }
 
-        const translations = {
-            en: {
-                nav_home: "Home", nav_archive: "The Archive", nav_collections: "Collections", nav_journal: "Journal",
-                mega_men: "For Men", mega_women: "For Women", mega_unisex: "Unisex", mega_about: "Heritage",
-                hero_tag: "Defining Luxury Since 1992", hero_title: "A Symphony of Invisible Elegance", hero_cta: "Explore Archive",
-                archive_tag: "Curated Collections", archive_title: "The Fragrance Vault", filter_all: "All", filter_men: "Men",
-                filter_women: "Women", filter_unisex: "Unisex", cart_title: "Your Acquisitions", total: "Total Value",
-                checkout: "Initiate Checkout", gift_wrap: "Luxury Gift Wrapping Protocol", stock: "units remaining",
-                back: "Back", search_placeholder: "Seek a fragrance...", newsletter_title: "Join the Inner Circle",
-                newsletter_desc: "Receive access to exclusive batches and olfactory insights.", newsletter_btn: "Subscribe",
-                concierge_welcome: "Welcome. How may we assist your journey?", concierge_input: "Inquire here...",
-                concierge_send: "Send", quiz_title: "Olfactory Profiling", quiz_desc: "Select your desired environment:",
-                quiz_option_dark: "Moonlit Gala", quiz_option_fresh: "Azure Coast", quiz_option_exec: "Executive Suite",
-                quiz_option_sweet: "Royal Garden", quiz_recommend: "Your Olfactory Soulmate:", quiz_acquire: "Acquire Now",
-                announcement: "Complementary International Shipping on Acquisitions Over 5000 EGP", wishlist_title: "Wishlist Vault"
-            },
-            ar: {
-                nav_home: "الرئيسية", nav_archive: "الأرشيف", nav_collections: "المجموعات", nav_journal: "المجلة",
-                mega_men: "للرجال", mega_women: "للنساء", mega_unisex: "للجنسين", mega_about: "التراث",
-                hero_tag: "تعريف الفخامة منذ عام 1992", hero_title: "سمفونية من الأناقة غير المرئية", hero_cta: "استكشف الأرشيف",
-                archive_tag: "مجموعات مختارة", archive_title: "قبو العطور", filter_all: "الكل", filter_men: "رجال",
-                filter_women: "نساء", filter_unisex: "للجنسين", cart_title: "مقتنياتك", total: "القيمة الإجمالية",
-                checkout: "بدء عملية الدفع", gift_wrap: "تغليف الهدايا الفاخر", stock: "قطعة متبقية",
-                back: "رجوع", search_placeholder: "ابحث عن عطر...", newsletter_title: "انضم إلى الدائرة الداخلية",
-                newsletter_desc: "احصل على وصول إلى دفعات حصرية ورؤى عطرية.", newsletter_btn: "اشتراك",
-                concierge_welcome: "مرحباً بك. كيف يمكننا مساعدتك في رحلتك؟", concierge_input: "استفسر هنا...",
-                concierge_send: "إرسال", quiz_title: "التنميط الشمي", quiz_desc: "اختر البيئة المفضلة لديك:",
-                quiz_option_dark: "حفل ضوء القمر", quiz_option_fresh: "الساحل اللازوردي", quiz_option_exec: "جناح تنفيذي",
-                quiz_option_sweet: "الحديقة الملكية", quiz_recommend: "رفيق روحك العطري:", quiz_acquire: "اقتني الآن",
-                announcement: "شحن دولي مجاني للمقتنيات التي تزيد عن 5000 جنيه مصري", wishlist_title: "قبو الأمنيات"
+        let selectedMethod = null;
+        function selectPayment(method) {
+            selectedMethod = method;
+            document.querySelectorAll('.payment-card').forEach(c => c.classList.remove('active'));
+            document.getElementById('card-' + method).classList.add('active');
+            const instructions = document.getElementById('payment-instructions');
+            instructions.classList.remove('hidden');
+            if (method === 'vodafone') {
+                instructions.innerText = 'Send your total to Vodafone Wallet: 01004268823 — then click Finalize Acquisition below.';
+            } else {
+                instructions.innerText = 'Send your total to Telda: @soly5656 — then click Finalize Acquisition below.';
             }
-        };
-
-        function getLang() { return localStorage.getItem('eccence_lang') || 'en'; }
-        function t(key) { return translations[getLang()][key] || key; }
-        function getRecentlyViewed() { return JSON.parse(localStorage.getItem('eccence_recent') || '[]'); }
-        function addToRecentlyViewed(product) {
-            let recent = getRecentlyViewed();
-            recent = recent.filter(p => p.id !== product.id);
-            recent.unshift(product);
-            recent = recent.slice(0, 4);
-            localStorage.setItem('eccence_recent', JSON.stringify(recent));
         }
     </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Montserrat:wght@100;300;400;600&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #d4af37; --gold-soft: #c5a028; --deep-burgundy: #1a0505; --panel-burgundy: #250808; --glass: rgba(255, 255, 255, 0.03); --cream: #fdf5e6; }
-        body { background-color: var(--deep-burgundy); color: var(--cream); font-family: 'Montserrat', sans-serif; }
+        body { background-color: var(--deep-burgundy); color: var(--cream); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
         .luxury-font { font-family: 'Cormorant Garamond', serif; }
         
         .shopify-input { 
@@ -148,12 +115,6 @@
             outline: none; 
             transition: 0.3s; 
         }
-        .shopify-input:focus { border-color: var(--gold); background: rgba(212, 175, 55, 0.05); }
-
-        /* Scroll Reveal */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.22, 1, 0.36, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-    </style>
         .shopify-input:focus { border-color: var(--gold); background: rgba(212, 175, 55, 0.05); }
         .shopify-input::placeholder { color: rgba(253, 245, 230, 0.2); }
  
@@ -204,6 +165,9 @@
             border-color: var(--gold);
             background: rgba(212, 175, 55, 0.08);
         }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body class="min-h-screen">
@@ -212,7 +176,7 @@
         
         <!-- LEFT SIDE: FORMS -->
         <div class="w-full md:w-[60%] p-8 md:p-20">
-            <h1 class="luxury-font text-4xl tracking-[0.5em] mb-16 cursor-pointer" onclick="window.location.href='index.html'">ECCENCE</h1>
+            <h1 class="luxury-font text-4xl tracking-[0.5em] mb-16 cursor-pointer" onclick="window.location.href='./'">ECCENCE</h1>
             
             <!-- CONTACT -->
             <div class="reveal">
@@ -303,16 +267,16 @@
             <div class="space-y-4 text-[10px] tracking-[0.2em] uppercase border-t border-white/10 pt-10">
                 <div class="flex justify-between opacity-40">
                     <span>Subtotal</span>
-                    <span id="subtotal">0 EGP</span>
+                    <span id="summary-subtotal">0 EGP</span>
                 </div>
                 <div class="flex justify-between items-center opacity-40">
                     <span>Shipping Protocol</span>
-                    <span>Complimentary</span>
+                    <span id="summary-shipping">Complimentary</span>
                 </div>
                 <div class="flex justify-between items-baseline pt-6">
                     <span class="luxury-font text-3xl italic normal-case tracking-normal text-gold">Total Value</span>
                     <div class="text-right">
-                        <span id="total" class="text-4xl text-gold italic">0 EGP</span>
+                        <span id="summary-total" class="text-4xl text-gold italic">0 EGP</span>
                     </div>
                 </div>
             </div>
@@ -321,43 +285,35 @@
     </div>
 
     <script>
-        let selectedMethod = null;
-
-        function selectPayment(method) {
-            selectedMethod = method;
-            document.querySelectorAll('.payment-card').forEach(c => c.classList.remove('active'));
-            document.getElementById('card-' + method).classList.add('active');
-            const instructions = document.getElementById('payment-instructions');
-            instructions.classList.remove('hidden');
-            if (method === 'vodafone') {
-                instructions.innerText = 'Send your total to Vodafone Wallet: 01004268823 — then click Finalize Acquisition below.';
-            } else {
-                instructions.innerText = 'Send your total to Telda: @soly5656 — then click Finalize Acquisition below.';
-            }
-        }
-
         function renderSummary() {
             const cart = getCart();
             const container = document.getElementById('summary-items');
-            container.innerHTML = cart.map(item => `
-                <div class="flex justify-between items-center gap-8">
+            container.innerHTML = cart.map(item => {
+                const encodedFile = item.file.split('/').map(part => encodeURIComponent(part)).join('/');
+                return `
+                <div class="flex gap-6 items-center">
                     <div class="relative">
                         <div class="w-20 h-20 bg-white/5 border border-white/10 rounded-sm overflow-hidden flex items-center justify-center p-3">
-                            <img src="${item.file}" class="max-h-full max-w-full object-contain drop-shadow-xl">
+                            <img src="${encodedFile}" onerror="this.onerror=null;this.src='https://placehold.co/100x100/1a0505/d4af37?text=ECCENCE'" class="max-h-full max-w-full object-contain drop-shadow-xl">
                         </div>
                         <span class="absolute -top-3 -right-3 bg-gold text-black text-[9px] w-6 h-6 rounded-full flex items-center justify-center font-bold">1</span>
                     </div>
                     <div class="flex-grow">
                         <h4 class="luxury-font text-2xl italic">${item.name}</h4>
-                        <p class="text-[8px] tracking-widest uppercase opacity-30 mt-1">High-Concentration Extract</p>
+                        <p class="text-[8px] tracking-widest uppercase opacity-30 mt-1">Authentic Batch</p>
                     </div>
                     <span class="text-gold italic text-lg">${item.price} EGP</span>
                 </div>
-            `).join('');
-
-            const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
-            document.getElementById('subtotal').innerText = `${subtotal} EGP`;
-            document.getElementById('total').innerText = `${subtotal} EGP`;
+                `;
+            }).join('');
+            
+            const subtotal = cart.reduce((s, i) => s + i.price, 0);
+            const shipping = subtotal > 5000 ? 0 : 250;
+            const total = subtotal + shipping;
+            
+            document.getElementById('summary-subtotal').innerText = subtotal + " EGP";
+            document.getElementById('summary-shipping').innerText = shipping === 0 ? "Complimentary" : shipping + " EGP";
+            document.getElementById('summary-total').innerText = total + " EGP";
         }
 
         async function finalizeOrder() {
@@ -375,7 +331,7 @@
                 city: document.getElementById('city').value,
                 phone: document.getElementById('phone').value,
                 items: cart.map(i => i.name).join(', '),
-                total: document.getElementById('total').innerText
+                total: document.getElementById('summary-total').innerText
             };
 
             if(!orderData.email || !orderData.firstName || !orderData.address) {
@@ -420,7 +376,7 @@
         lucide.createIcons();
         
         // Scroll Reveal logic
-        window.onscroll = () => {
+        function handleScroll() {
             const reveals = document.querySelectorAll('.reveal');
             reveals.forEach(el => {
                 const windowHeight = window.innerHeight;
@@ -428,13 +384,14 @@
                 const revealPoint = 100;
                 if(revealTop < windowHeight - revealPoint) el.classList.add('active');
             });
-        };
+        }
+        window.onscroll = handleScroll;
         
         document.addEventListener('DOMContentLoaded', () => {
             // Add reveal class to cards and sections
-            document.querySelectorAll('.payment-card, .shopify-input, .section-title, .bg-panel-burgundy').forEach(el => el.classList.add('reveal'));
+            document.querySelectorAll('.payment-card, .shopify-input, .section-title, .reveal').forEach(el => el.classList.add('reveal'));
             // Initial check
-            window.dispatchEvent(new Event('scroll'));
+            setTimeout(handleScroll, 100);
         });
     </script>
 </body>

@@ -10,6 +10,7 @@
     <!-- External Dependencies -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Montserrat:wght@100;300;400;600&display=swap" rel="stylesheet">
     <script>
         // ECCENCE SHARED LOGIC & INVENTORY
@@ -46,13 +47,13 @@
             { id: 30, name: "LV Imagination", gender: "Men", file: "lv_imagination_1778786798091.png", price: 800, old: 5600, notes: ["Fresh", "Citrus"], stock: 3 },
             { id: 31, name: "LV Pacific Chill", gender: "Men", file: "lv_pacific_1778786810610.png", price: 800, old: 5600, notes: ["Fresh", "Fruity"], stock: 3 },
             { id: 32, name: "Dark Verse", gender: "Women", file: "essesce products/_i think lovely one.png", price: 1350, old: 1800, notes: ["Dark", "Woody"], stock: 4 },
-            { id: 33, name: "PDM Delina Exclusif", gender: "Women", file: "essesce products/Top Luxury Perfumes for Woman on Amazon.png", price: 750, old: 7200, notes: ["Rose", "Sweet", "Floral"], stock: 2 },
+            { id: 33, name: "PDM Delina Exclusif", gender: "Women", file: "Top Luxury Perfumes for Woman on Amazon.png", price: 750, old: 7200, notes: ["Rose", "Sweet", "Floral"], stock: 2 },
             { id: 34, name: "YSL Libre Intense", gender: "Women", file: "essesce products/How to Choose Fragrances Based on Your Seasonal Color Palette.png", price: 800, old: 3100, notes: ["Lavender", "Vanilla", "Sweet"], stock: 4 },
             { id: 35, name: "Valentino Born Roma", gender: "Women", file: "essesce products/Valentino Donna Born in Roma Intense Eau de Parfum _ Dillard's.png", price: 800, old: 2750, notes: ["Sweet", "Fruity"], stock: 5 },
-            { id: 36, name: "YSL Babycat", gender: "Men", file: "essesce products/11 Leather Perfumes For Any and Every Occasion.png", price: 5500, old: 6500, notes: ["Vanilla", "Spicy", "Dark"], stock: 0 },
+            { id: 36, name: "YSL Babycat", gender: "Men", file: "11 Leather Perfumes For Any and Every Occasion.png", price: 5500, old: 6500, notes: ["Vanilla", "Spicy", "Dark"], stock: 0 },
             { id: 37, name: "ADG Profondo", gender: "Men", file: "aqua_di_gio_profondo_1778787520010.png", price: 850, old: 2400, notes: ["Sea Notes", "Fresh", "Executive"], stock: 4 },
             { id: 38, name: "Creed Aventus", gender: "Men", file: "essesce products/Top 10 Parfumuri Pentru Bărbați din Zodia Săgetător - Replique Parfumerie.png", price: 750, old: 9000, notes: ["Pineapple", "Woody", "Executive"], stock: 3 },
-            { id: 39, name: "Lattafa Asad", gender: "Men", file: "essesce products/10 Best Fragrances For Men 2024.png", price: 700, old: 1300, notes: ["Spicy", "Amber", "Dark"], stock: 10 },
+            { id: 39, name: "Lattafa Asad", gender: "Men", file: "10 Best Fragrances For Men 2024.png", price: 700, old: 1300, notes: ["Spicy", "Amber", "Dark"], stock: 10 },
             { id: 40, name: "Ajwad by Lattafa", gender: "Men", file: "Ajwad by Lattafa for Men - 2_04 oz EDP Spray.png", price: 850, old: 1050, notes: ["Woody", "Amber", "Dark"], stock: 8 },
             { id: 41, name: "Black Diamond Incense", gender: "Unisex", file: "BLACK DIAMOND INCENSE IBRAHIM AL QURASHI _ IBRAQ PERFUME _ IBRAHEEM AL QURASHI.png", price: 950, old: 4500, notes: ["Oud", "Incense", "Dark"], stock: 2 },
             { id: 42, name: "Black Carbon Diamond", gender: "Men", file: "Black Carbon Diamond Edp 150ml By Ibraheem Al Qurashi.png", price: 950, old: 3900, notes: ["Woody", "Spicy", "Dark", "Executive"], stock: 3 },
@@ -130,6 +131,7 @@
             --primary: #1a0505; --primary-soft: #2a0a0a; --gold: #d4af37; --gold-light: #f9e29b;
             --cream: #fdf5e6; --white: #ffffff; --black: #000000;
             --transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            --header-height: 90px;
         }
         
         [data-theme="light"] {
@@ -143,6 +145,17 @@
             overflow-x: hidden;
             transition: background-color 0.5s ease, color 0.5s ease;
         }
+
+        /* Mobile header fix */
+        @media (max-width: 768px) {
+            #main-header { padding: 16px 20px !important; }
+            #main-header .logo { font-size: 1.6rem !important; }
+            #main-header > div:last-child { gap: 14px !important; }
+        }
+
+        /* Archive section padding fix - push content below fixed header */
+        #tab-archive { padding-top: 0; }
+        #tab-archive > div { padding-top: 120px !important; }
 
         .serif { font-family: 'Cormorant Garamond', serif; }
         
@@ -255,8 +268,6 @@
         }
         .luxury-glow:hover::after { opacity: 1; }
     </style>
-    <!-- Vanilla Tilt for 3D Effects -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
 </head>
 <body data-theme="dark">
 
@@ -407,8 +418,8 @@
         </section>
 
         <!-- ARCHIVE TAB -->
-        <section id="tab-archive" class="page-tab">
-            <div class="pt-48 pb-32 px-8">
+        <section id="tab-archive" class="page-tab" style="padding-top:0;">
+            <div class="pb-32 px-8" style="padding-top:130px;">
                 <!-- Breadcrumbs -->
                 <div class="text-[9px] uppercase tracking-widest opacity-50 mb-10 text-center lg:text-left">
                     <span class="cursor-pointer hover:text-gold" onclick="switchTab('home')">Home</span> <span class="mx-2">></span> <span>The Archive</span>
@@ -463,6 +474,58 @@
             </div>
         </section>
     </main>
+
+    <!-- FOOTER -->
+    <footer id="site-footer" style="background:#0d0202;border-top:1px solid rgba(212,175,55,0.08);padding:80px 60px 40px;display:none;">
+        <div style="max-width:1400px;margin:0 auto;">
+            <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:60px;">
+                <!-- Brand -->
+                <div>
+                    <h3 class="serif" style="font-size:32px;letter-spacing:0.4em;color:#d4af37;margin-bottom:20px;">ECCENCE</h3>
+                    <p style="font-size:11px;opacity:0.4;line-height:1.9;max-width:280px;">Haute Parfumerie since 1992. Curators of the world's most exclusive olfactory experiences, delivered to your door.</p>
+                    <div style="display:flex;gap:16px;margin-top:24px;">
+                        <a href="#" style="width:36px;height:36px;border:1px solid rgba(212,175,55,0.2);display:flex;align-items:center;justify-content:center;color:#d4af37;transition:0.3s;" onmouseover="this.style.borderColor='#d4af37'" onmouseout="this.style.borderColor='rgba(212,175,55,0.2)'"><i data-lucide="instagram" style="width:14px;height:14px;"></i></a>
+                        <a href="#" style="width:36px;height:36px;border:1px solid rgba(212,175,55,0.2);display:flex;align-items:center;justify-content:center;color:#d4af37;transition:0.3s;" onmouseover="this.style.borderColor='#d4af37'" onmouseout="this.style.borderColor='rgba(212,175,55,0.2)'"><i data-lucide="facebook" style="width:14px;height:14px;"></i></a>
+                        <a href="#" style="width:36px;height:36px;border:1px solid rgba(212,175,55,0.2);display:flex;align-items:center;justify-content:center;color:#d4af37;transition:0.3s;" onmouseover="this.style.borderColor='#d4af37'" onmouseout="this.style.borderColor='rgba(212,175,55,0.2)'"><i data-lucide="twitter" style="width:14px;height:14px;"></i></a>
+                    </div>
+                </div>
+                <!-- Archive -->
+                <div>
+                    <h4 style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#d4af37;margin-bottom:20px;opacity:0.8;">The Archive</h4>
+                    <div style="display:flex;flex-direction:column;gap:10px;">
+                        <a href="#" onclick="setFilter('Men');switchTab('archive')" style="font-size:11px;opacity:0.4;transition:0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.4'">For Men</a>
+                        <a href="#" onclick="setFilter('Women');switchTab('archive')" style="font-size:11px;opacity:0.4;transition:0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.4'">For Women</a>
+                        <a href="#" onclick="setFilter('Unisex');switchTab('archive')" style="font-size:11px;opacity:0.4;transition:0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.4'">Unisex</a>
+                        <a href="#" onclick="switchTab('archive')" style="font-size:11px;opacity:0.4;transition:0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.4'">All Batches</a>
+                    </div>
+                </div>
+                <!-- Services -->
+                <div>
+                    <h4 style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#d4af37;margin-bottom:20px;opacity:0.8;">Concierge</h4>
+                    <div style="display:flex;flex-direction:column;gap:10px;">
+                        <a href="#" style="font-size:11px;opacity:0.4;transition:0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.4'">Shipping Protocols</a>
+                        <a href="#" style="font-size:11px;opacity:0.4;transition:0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.4'">Return Policy</a>
+                        <a href="#" style="font-size:11px;opacity:0.4;transition:0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.4'">Authenticity Guarantee</a>
+                        <a href="#" onclick="toggleChat()" style="font-size:11px;opacity:0.4;transition:0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.4'">Live Concierge</a>
+                    </div>
+                </div>
+                <!-- Contact -->
+                <div>
+                    <h4 style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#d4af37;margin-bottom:20px;opacity:0.8;">Contact</h4>
+                    <div style="display:flex;flex-direction:column;gap:10px;font-size:11px;opacity:0.4;">
+                        <p>Vodafone: 01004268823</p>
+                        <p>Telda: @soly5656</p>
+                        <p style="margin-top:8px;">Cairo, Egypt</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Bar -->
+            <div style="border-top:1px solid rgba(212,175,55,0.06);padding-top:30px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+                <p style="font-size:9px;opacity:0.2;letter-spacing:0.2em;text-transform:uppercase;">© 2024 ECCENCE Haute Parfumerie. All Acquisitions Reserved.</p>
+                <p style="font-size:9px;opacity:0.2;letter-spacing:0.2em;text-transform:uppercase;">Defining Luxury Since 1992</p>
+            </div>
+        </div>
+    </footer>
 
     <!-- Side Overlays & Drawers -->
     <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawers()"></div>
@@ -584,11 +647,11 @@
         </div>
     </div>
 
-    <div id="concierge-trigger" class="fixed bottom-30 left-30 z-[1000] cursor-pointer bg-primary border border-gold w-16 h-16 rounded-full flex items-center justify-center shadow-2xl" onclick="toggleChat()">
-        <i data-lucide="message-square" class="text-gold w-6 h-6"></i>
+    <div id="concierge-trigger" class="fixed bottom-8 left-8 z-[1000] cursor-pointer bg-primary border border-gold w-14 h-14 rounded-full flex items-center justify-center shadow-2xl" style="bottom:32px;left:32px;" onclick="toggleChat()">
+        <i data-lucide="message-square" class="text-gold w-5 h-5"></i>
     </div>
     
-    <div id="chat-modal" class="fixed bottom-24 left-8 w-[350px] bg-primary border border-gold z-[1001] hidden flex flex-col shadow-2xl animate-fade">
+    <div id="chat-modal" class="fixed w-[350px] bg-primary border border-gold z-[1001] hidden flex-col shadow-2xl animate-fade" style="bottom:100px;left:32px;">
         <div class="bg-gold text-primary p-5 flex justify-between items-center">
             <span class="font-bold tracking-widest uppercase text-xs">ECCENCE Concierge</span>
             <button onclick="toggleChat()"><i data-lucide="x" class="w-4 h-4"></i></button>
@@ -661,6 +724,9 @@
             applyTheme();
             updateGlobalUI();
             renderFeatured();
+            // Show footer on home tab (initial state)
+            const footer = document.getElementById('site-footer');
+            if(footer) footer.style.display = 'block';
         }
 
         function applyLanguage() {
@@ -706,6 +772,10 @@
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('text-gold'));
             window.scrollTo(0,0);
             
+            // Show footer only on home tab
+            const footer = document.getElementById('site-footer');
+            if(footer) footer.style.display = (tab === 'home') ? 'block' : 'none';
+            
             if(tab === 'archive') renderArchive();
             lucide.createIcons();
         }
@@ -750,16 +820,22 @@
         }
 
         function productCard(p) {
+            const encodedFile = p.file.split('/').map(part => encodeURIComponent(part)).join('/');
+            const outOfStock = p.stock === 0;
             return `
-                <div class="glass-card p-10 animate-fade" onclick="openProductModal(${p.id})">
-                    <div class="relative aspect-square mb-10 overflow-hidden group">
-                        <img src="${p.file}" loading="lazy" class="max-h-full mx-auto object-contain transition-transform duration-700 group-hover:scale-110">
-                        <button onclick="event.stopPropagation(); quickAcquire(${p.id})" class="absolute bottom-0 left-0 w-full bg-gold text-primary text-[9px] tracking-widest font-bold py-4 translate-y-full group-hover:translate-y-0 transition-transform">QUICK ACQUISITION</button>
+                <div class="glass-card p-6 animate-fade cursor-pointer" onclick="openProductModal(${p.id})" style="position:relative;">
+                    ${outOfStock ? '<div style="position:absolute;top:12px;right:12px;background:rgba(212,175,55,0.15);border:1px solid rgba(212,175,55,0.4);padding:3px 10px;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:#d4af37;z-index:2;">Sold Out</div>' : ''}
+                    <div class="relative mb-6 overflow-hidden group" style="height:220px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.03);">
+                        <img src="${encodedFile}" onerror="this.onerror=null;this.src='https://placehold.co/400x400/1a0505/d4af37?text=ECCENCE'" loading="lazy" style="max-height:200px;max-width:100%;object-fit:contain;transition:transform 0.7s ease;" class="group-hover:scale-110">
+                        ${!outOfStock ? `<button onclick="event.stopPropagation(); quickAcquire(${p.id})" style="position:absolute;bottom:0;left:0;width:100%;background:#d4af37;color:#1a0505;font-size:9px;letter-spacing:0.2em;font-weight:700;padding:12px 0;transform:translateY(100%);transition:transform 0.3s ease;" class="group-hover:translate-y-0">QUICK ACQUISITION</button>` : ''}
                     </div>
-                    <div class="space-y-2">
-                        <p class="text-[8px] tracking-[0.4em] uppercase opacity-30">${p.gender}</p>
-                        <h4 class="serif text-2xl italic">${p.name}</h4>
-                        <p class="text-gold text-sm tracking-widest">${p.price} EGP</p>
+                    <div class="space-y-1">
+                        <p style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.4;">${p.gender}</p>
+                        <h4 class="serif" style="font-size:20px;font-style:italic;line-height:1.3;">${p.name}</h4>
+                        <div style="display:flex;align-items:center;gap:10px;margin-top:6px;">
+                            <p style="color:#d4af37;font-size:13px;letter-spacing:0.15em;">${p.price} EGP</p>
+                            ${p.old ? `<p style="font-size:11px;opacity:0.3;text-decoration:line-through;">${p.old} EGP</p>` : ''}
+                        </div>
                     </div>
                 </div>
             `;
@@ -795,9 +871,11 @@
                 document.getElementById('cart-total').innerText = "0 EGP";
                 return;
             }
-            container.innerHTML = cart.map((item, idx) => `
+            container.innerHTML = cart.map((item, idx) => {
+                const encodedFile = item.file.split('/').map(part => encodeURIComponent(part)).join('/');
+                return `
                 <div class="flex gap-6 items-center border-b border-white/5 pb-8 animate-fade">
-                    <img src="${item.file}" loading="lazy" class="w-16 h-16 bg-white object-contain p-2">
+                    <img src="${encodedFile}" onerror="this.onerror=null;this.src='https://placehold.co/100x100/1a0505/d4af37?text=ECCENCE'" loading="lazy" class="w-16 h-16 bg-white object-contain p-2">
                     <div class="flex-grow">
                         <h5 class="serif text-lg leading-tight">${item.name}</h5>
                         <p class="text-gold text-xs mt-1">${item.price} EGP</p>
@@ -834,9 +912,11 @@
                 container.innerHTML = '<p class="opacity-20 text-center py-20 text-xs">No desires recorded.</p>';
                 return;
             }
-            container.innerHTML = items.map(item => `
+            container.innerHTML = items.map(item => {
+                const encodedFile = item.file.split('/').map(part => encodeURIComponent(part)).join('/');
+                return `
                 <div class="flex gap-6 items-center border-b border-white/5 pb-8 cursor-pointer" onclick="openProductModal(${item.id}); closeDrawers();">
-                    <img src="${item.file}" loading="lazy" class="w-12 h-12 bg-white object-contain p-1">
+                    <img src="${encodedFile}" onerror="this.onerror=null;this.src='https://placehold.co/100x100/1a0505/d4af37?text=ECCENCE'" loading="lazy" class="w-12 h-12 bg-white object-contain p-1">
                     <div>
                         <h5 class="serif text-md">${item.name}</h5>
                         <p class="text-gold text-[10px]">${item.price} EGP</p>
@@ -849,7 +929,8 @@
         function openProductModal(id) {
             activeProduct = inventory.find(x => x.id === id);
             activeVariant = activeProduct.variants ? activeProduct.variants[0] : null;
-            document.getElementById('m-img').src = activeProduct.file;
+            const encodedFile = activeProduct.file.split('/').map(part => encodeURIComponent(part)).join('/');
+            document.getElementById('m-img').src = encodedFile;
             document.getElementById('m-name').innerText = activeProduct.name;
             updateModalPrice();
             document.getElementById('m-cat').innerText = activeProduct.gender;
@@ -882,12 +963,15 @@
             
             // Related Products
             const related = inventory.filter(p => p.id !== activeProduct.id && (p.gender === activeProduct.gender || p.notes.some(n => activeProduct.notes.includes(n)))).slice(0, 3);
-            document.getElementById('m-related').innerHTML = related.map(p => `
+            document.getElementById('m-related').innerHTML = related.map(p => {
+                const enc = p.file.split('/').map(part => encodeURIComponent(part)).join('/');
+                return `
                 <div class="min-w-[100px] cursor-pointer hover:border-gold border border-transparent transition" onclick="openProductModal(${p.id})">
-                    <img src="${p.file}" class="w-16 h-16 object-contain bg-white/5 mx-auto mb-2 p-2">
+                    <img src="${enc}" onerror="this.onerror=null;this.src='https://placehold.co/100x100/1a0505/d4af37?text=ECCENCE'" class="w-16 h-16 object-contain bg-white/5 mx-auto mb-2 p-2">
                     <p class="text-[8px] text-center uppercase tracking-widest opacity-60 truncate px-1">${p.name}</p>
                 </div>
-            `).join('');
+                `;
+            }).join('');
             
             document.getElementById('product-modal').classList.remove('hidden');
             addToRecentlyViewed(activeProduct);
@@ -1024,7 +1108,7 @@
         }
 
         // Header Transparency
-        window.onscroll = () => {
+        function handleScroll() {
             const header = document.getElementById('main-header');
             if(window.scrollY > 50) {
                 header.classList.add('bg-primary/95', 'backdrop-blur-xl', 'py-4', 'border-b', 'border-white/5');
@@ -1037,24 +1121,30 @@
             reveals.forEach(el => {
                 const windowHeight = window.innerHeight;
                 const revealTop = el.getBoundingClientRect().top;
-                const revealPoint = 150;
+                const revealPoint = 100;
                 if(revealTop < windowHeight - revealPoint) el.classList.add('active');
             });
-        };
+        }
+        window.onscroll = handleScroll;
 
         // Initialize 3D Tilt and Animations
         document.addEventListener('DOMContentLoaded', () => {
             // Add reveal class to sections
             document.querySelectorAll('section, .glass-card').forEach(el => el.classList.add('reveal'));
             
+            // Trigger initial scroll check
+            setTimeout(handleScroll, 100);
+
             // Initialize Vanilla Tilt
-            VanillaTilt.init(document.querySelectorAll(".glass-card"), {
-                max: 15,
-                speed: 400,
-                glare: true,
-                "max-glare": 0.2,
-                scale: 1.05
-            });
+            if (typeof VanillaTilt !== 'undefined') {
+                VanillaTilt.init(document.querySelectorAll(".glass-card"), {
+                    max: 15,
+                    speed: 400,
+                    glare: true,
+                    "max-glare": 0.2,
+                    scale: 1.05
+                });
+            }
         });
     </script>
 </body>
